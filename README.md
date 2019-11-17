@@ -1,7 +1,6 @@
 # Overview
 
-This project contains general purpose annotations for
-Jackson Data Processor, used on value and handler types.
+This project contains annotations for use in injecting values into bean properties from AWS Secrets Manager or AWS Parameter Store.
 
 Project is licensed under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
@@ -25,9 +24,9 @@ To use annotations, you need to use Maven dependency:
 
 ## Usage - coding
 
-### Annotations for renaming properties
+### Annotations for injecting values from AWS Parameter Store
 
-### Annotations for Ignoring properties
+### Annotations for injecting values from AWS Secrets Manager
 
 -----
 
