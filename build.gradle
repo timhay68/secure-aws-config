@@ -1,0 +1,71 @@
+plugins {
+    id 'java'
+    id 'maven'
+    id 'maven-publish'
+    id 'jacoco'
+    id 'idea'
+    id 'org.springframework.boot' version '2.1.5.RELEASE'
+}
+
+ext {
+}
+
+repositories {
+    mavenLocal()
+    jcenter()
+}
+
+group = "au.com.haystacker"
+
+idea {
+    module {
+        outputDir file('build/classes/main')
+        testOutputDir file('build/classes/test')
+    }
+}
+
+jar {
+    enabled = true
+}
+
+bootJar {
+    enabled = false
+}
+
+configurations { providedCompile }
+
+dependencies {
+    compile "com.amazonaws:aws-java-sdk-s3:${awsJavaSdkVersion}"
+    compile "com.amazonaws:aws-java-sdk-secretsmanager:${awsJavaSdkVersion}"
+    compile "com.amazonaws:aws-java-sdk-ssm:${awsJavaSdkVersion}"
+    compile "org.springframework:spring-context:${springFrameworkVersion}"
+    compile "org.springframework.boot:spring-boot:${springFrameworkBootVersion}"
+    compile "org.springframework.boot:spring-boot-starter:${springFrameworkBootVersion}"
+    compile "org.springframework.boot:spring-boot-gradle-plugin:${springFrameworkBootVersion}"
+
+    providedCompile "com.fasterxml.jackson.core:jackson-annotations"
+    providedCompile "com.fasterxml.jackson.core:jackson-core"
+    providedCompile "com.fasterxml.jackson.core:jackson-databind"
+
+    testCompile "org.springframework.boot:spring-boot-starter-test:${springFrameworkBootVersion}"
+    testCompile "org.springframework.boot:spring-boot-starter:${springFrameworkBootVersion}"
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
+    repositories {
+        mavenLocal()
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled false
+        csv.enabled false
+        html.destination file("${buildDir}/jacocoHtml")
+    }
+}
