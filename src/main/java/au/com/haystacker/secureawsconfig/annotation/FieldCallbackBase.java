@@ -8,6 +8,11 @@ import org.springframework.util.ReflectionUtils;
 import java.lang.reflect.Field;
 import java.util.Map;
 
+/**
+ *
+ *
+ * @author Tim Hay
+ */
 public abstract class FieldCallbackBase implements ReflectionUtils.FieldCallback {
 
     private static final Logger LOG = LoggerFactory.getLogger(FieldCallbackBase.class);

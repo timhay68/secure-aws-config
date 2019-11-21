@@ -2,6 +2,11 @@ package au.com.haystacker.secureawsconfig.parameters.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ *
+ *
+ * @author Tim Hay
+ */
 @ConfigurationProperties(prefix = AwsParameterStoreProperties.PREFIX)
 public class AwsParameterStoreProperties {
 

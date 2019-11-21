@@ -9,6 +9,8 @@ import java.lang.annotation.Target;
 /**
  * Annotation at the field level which indicates that the field to which
  * it is applied should be bound to an entry in AWS Parameter Store.
+ *
+ * @author Tim Hay
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})

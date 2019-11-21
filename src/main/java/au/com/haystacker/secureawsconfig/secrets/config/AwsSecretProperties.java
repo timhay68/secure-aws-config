@@ -2,6 +2,11 @@ package au.com.haystacker.secureawsconfig.secrets.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/**
+ *
+ *
+ * @author Tim Hay
+ */
 @ConfigurationProperties(prefix = AwsSecretProperties.PREFIX)
 public class AwsSecretProperties {
 

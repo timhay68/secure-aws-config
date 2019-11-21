@@ -1,6 +1,8 @@
 # Overview
 
-This project contains annotations for use in injecting values into bean properties from AWS Secrets Manager or AWS Parameter Store.
+This project contains annotations for use in injecting values into bean properties from one of two storage locations:
+* AWS Secrets Manager or 
+* AWS Parameter Store.
 
 Project is licensed under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 

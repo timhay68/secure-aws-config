@@ -11,6 +11,11 @@ import org.springframework.util.ReflectionUtils;
 
 import java.util.Map;
 
+/**
+ *
+ *
+ * @author Tim Hay
+ */
 @Component
 public class AwsSecretAnnotationProcessor implements BeanPostProcessor {
 

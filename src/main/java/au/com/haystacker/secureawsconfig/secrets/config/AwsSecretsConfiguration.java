@@ -18,6 +18,11 @@ import java.nio.ByteBuffer;
 import java.util.Base64;
 import java.util.Map;
 
+/**
+ *
+ *
+ * @author Tim Hay
+ */
 @Configuration
 @EnableConfigurationProperties(AwsSecretProperties.class)
 public class AwsSecretsConfiguration {

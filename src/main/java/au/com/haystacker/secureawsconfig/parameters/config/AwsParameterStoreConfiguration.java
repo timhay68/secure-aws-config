@@ -15,6 +15,11 @@ import javax.annotation.PostConstruct;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ *
+ *
+ * @author Tim Hay
+ */
 @Configuration
 @EnableConfigurationProperties(AwsParameterStoreProperties.class)
 public class AwsParameterStoreConfiguration {

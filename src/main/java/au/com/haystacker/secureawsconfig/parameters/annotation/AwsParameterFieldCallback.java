@@ -8,6 +8,11 @@ import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import java.lang.reflect.Field;
 import java.util.Map;
 
+/**
+ *
+ *
+ * @author Tim Hay
+ */
 public class AwsParameterFieldCallback extends FieldCallbackBase
 {
 
