@@ -176,7 +176,14 @@ See above for an example of how to use this annotation.
 The value for `secretName` is the key to an entry in the secret named by the `secure-config.secrets.secretName` property.
 
 ### Providing AWS Credentials
+In order for the respective SDKs to be able to execute their API calls, credentials must be provided for a role or user with the correct permissions to do so.
+The two client builders in this project each require injection of an `AWSCredentialsProvider` bean, to provide those credentials. 
+Assuming applications using the features of this project will ultimately be deployed to an EC2 server in AWS, a default `AWSCredentialsProvider` bean is provided, 
+which is auto-configured by `AWSSecureConfigConfiguration` in the fashion of a Spring Boot Starter. If your application provides an alternative `AWSCredentialsProvider` bean,
+the default one will 'back off'.
 
+It is very useful to be able to provide your own `AWSCredentialsProvider` bean, for example, when running your application locally on your own development workstation, 
+in which case you may wish to provide a `ProfileCredentialsProvider` bean.
 
 -----
 
