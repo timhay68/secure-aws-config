@@ -48,7 +48,7 @@ secure-config:
 
 `secure-config.parameters.pathBase` is the root of the hierarchy for the parameters used by your application. Do not end with a trailing slash.
 
-Please refer to [Providing AWS Credentials](###Providing AWS Credentials) for details on providing the AWS credentials required to be able to invoke the AWS Systems Manager SDK APIs.
+Please refer to [Providing AWS Credentials](#providing-aws-credentials) for details on providing the AWS credentials required to be able to invoke the AWS Systems Manager SDK APIs.
 
 #### @EnableSecureAWSParameters
 This annotation imports the configuration required to build a client which knows how to connect to AWS for the purpose of retrieving values from the AWS Parameter Store.
@@ -119,7 +119,7 @@ secure-config:
 
 `secure-config.secrets.secretName` is the name of the secret containing an entry used by your application.
 
-Please refer to [Providing AWS Credentials](###Providing AWS Credentials) for details on providing the AWS credentials required to be able to invoke the AWS Secrets Manager SDK APIs.
+Please refer to [Providing AWS Credentials](#providing-aws-credentials) for details on providing the AWS credentials required to be able to invoke the AWS Secrets Manager SDK APIs.
 
 #### @EnableSecureAWSSecrets
 This annotation imports the configuration required to build a client which knows how to connect to AWS for the purpose of retrieving values from the AWS Secrets Manager.
