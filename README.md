@@ -196,6 +196,7 @@ a `ProfileCredentialsProvider` bean.
 Related:
 
 * [AWS Security Best Practices](https://d0.awsstatic.com/whitepapers/Security/AWS_Security_Best_Practices.pdf) Whitepaper
+* [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/)
 * [AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/APIReference/Welcome.html)
 * [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/apireference/Welcome.html) 
 * [Using Instance Profiles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)
