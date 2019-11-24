@@ -102,7 +102,7 @@ See above for an example of how to use this annotation.
 
 `@AwsParameter` has one required parameter: `name`, which should be set to the remainder of the path to the AWS Parameter Store parameter.
 
-The value for `name` will be prefixed with the root configured by the `secure-config.parameters.pathBase` property.
+The value for `name` will be appended to the root configured by the `secure-config.parameters.pathBase` property.
 
 ### Annotations for injecting values from AWS Secrets Manager
 See AWS's documentation for [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) for further information on setting up secrets for your application, and why it's a good idea to do so.
