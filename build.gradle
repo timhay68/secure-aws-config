@@ -35,9 +35,8 @@ bootJar {
 configurations { providedCompile }
 
 dependencies {
-    compile "com.amazonaws:aws-java-sdk-s3:${awsJavaSdkVersion}"
-    compile "com.amazonaws:aws-java-sdk-secretsmanager:${awsJavaSdkVersion}"
-    compile "com.amazonaws:aws-java-sdk-ssm:${awsJavaSdkVersion}"
+    compile "software.amazon.awssdk:secretsmanager:${awsJavaSdkVersion}"
+    compile "software.amazon.awssdk:ssm:${awsJavaSdkVersion}"
     compile "org.springframework:spring-context:${springFrameworkVersion}"
     compile "org.springframework.boot:spring-boot:${springFrameworkBootVersion}"
     compile "org.springframework.boot:spring-boot-starter:${springFrameworkBootVersion}"

@@ -1,8 +1,5 @@
 package au.com.haystacker.secureawsconfig.secrets.config;
 
-import com.amazonaws.services.secretsmanager.AWSSecretsManager;
-import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest;
-import com.amazonaws.services.secretsmanager.model.GetSecretValueResult;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -11,6 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import software.amazon.awssdk.core.SdkBytes;
+import software.amazon.awssdk.services.secretsmanager.SecretsManagerClient;
+import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueRequest;
+import software.amazon.awssdk.services.secretsmanager.model.GetSecretValueResponse;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
@@ -33,7 +34,7 @@ public class AwsSecretsConfiguration {
     private AwsSecretProperties properties;
 
     @Autowired
-    private AWSSecretsManager client;
+    private SecretsManagerClient client;
 
     private Map<String, String> awsSecrets;
 
@@ -42,20 +43,21 @@ public class AwsSecretsConfiguration {
 
         LOG.info("**********   AwsSecretsConfiguration.getSecrets()");
 
-        GetSecretValueRequest getSecretValueRequest = new GetSecretValueRequest()
-                .withSecretId(properties.getSecretName());
-        GetSecretValueResult getSecretValueResult = null;
+        GetSecretValueRequest getSecretValueRequest = GetSecretValueRequest.builder()
+                .secretId(properties.getSecretName())
+                .build();
+        GetSecretValueResponse getSecretValueResult = null;
 
         getSecretValueResult = client.getSecretValue(getSecretValueRequest);
 
         // Decrypts secret using the associated KMS CMK.
         // Depending on whether the secret is a string or binary, one of these fields will be populated.
         String secrets;
-        if (getSecretValueResult.getSecretString() != null) {
-            secrets = getSecretValueResult.getSecretString();
+        if (getSecretValueResult.secretString() != null) {
+            secrets = getSecretValueResult.secretString();
         } else {
-            final ByteBuffer secretBinary = getSecretValueResult.getSecretBinary();
-            final ByteBuffer decodedSecretBinary = Base64.getDecoder().decode(secretBinary);
+            final SdkBytes secretBinary = getSecretValueResult.secretBinary();
+            final ByteBuffer decodedSecretBinary = Base64.getDecoder().decode(secretBinary.asByteBuffer());
             secrets = new String(decodedSecretBinary.array());
         }
         final ObjectMapper mapper = new ObjectMapper();
