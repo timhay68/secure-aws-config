@@ -39,14 +39,14 @@ See AWS's documentation for [AWS Parameter Store](https://docs.aws.amazon.com/sy
 #### Configuration
 Use of these annotations requires the following configuration in your `application.yml`:
 ```yaml
-secure-config:
+secure-aws-config:
   parameters:
     region: ap-southeast-2
     pathBase: /sampleapi/prod
 ```
-`secure-config.parameters.region` is the region in which your account created the AWS Parameter Store parameters.
+`secure-aws-config.parameters.region` is the region in which your account created the AWS Parameter Store parameters.
 
-`secure-config.parameters.pathBase` is the root of the hierarchy for the parameters used by your application. Do not end with a trailing slash.
+`secure-aws-config.parameters.pathBase` is the root of the hierarchy for the parameters used by your application. Do not end with a trailing slash.
 
 Please refer to [Providing AWS Credentials](#providing-aws-credentials) for details on providing the AWS credentials required to be able to invoke the AWS Systems Manager SDK APIs.
 
@@ -102,7 +102,7 @@ See above for an example of how to use this annotation.
 
 `@AwsParameter` has one required parameter: `name`, which should be set to the remainder of the path to the AWS Parameter Store parameter.
 
-The value for `name` will be appended to the root configured by the `secure-config.parameters.pathBase` property.
+The value for `name` will be appended to the root configured by the `secure-aws-config.parameters.pathBase` property.
 
 ### Annotations for injecting values from AWS Secrets Manager
 See AWS's documentation for [AWS Secrets Manager](https://aws.amazon.com/secrets-manager/) for further information on setting up secrets for your application, and why it's a good idea to do so.
@@ -110,14 +110,14 @@ See AWS's documentation for [AWS Secrets Manager](https://aws.amazon.com/secrets
 #### Configuration
 Use of these annotations requires the following configuration in your `application.yml`:
 ```yaml
-secure-config:
+secure-aws-config:
   secrets:
     region: ap-southeast-2
     secretName: sampleapi/pdev
 ```
-`secure-config.secrets.region` is the region in which your account created the AWS Secrets Manager entry.
+`secure-aws-config.secrets.region` is the region in which your account created the AWS Secrets Manager entry.
 
-`secure-config.secrets.secretName` is the name of the secret containing an entry used by your application.
+`secure-aws-config.secrets.secretName` is the name of the secret containing an entry used by your application.
 
 Please refer to [Providing AWS Credentials](#providing-aws-credentials) for details on providing the AWS credentials required to be able to invoke the AWS Secrets Manager SDK APIs.
 
@@ -173,19 +173,19 @@ See above for an example of how to use this annotation.
 
 `@AwsSecret` has one required parameter: `secretName`, which should be set to the key to an entry in AWS Secrets Manager.
 
-The value for `secretName` is the key to an entry in the secret named by the `secure-config.secrets.secretName` property.
+The value for `secretName` is the key to an entry in the secret named by the `secure-aws-config.secrets.secretName` property.
 
 ### Providing AWS Credentials
 In order for the respective SDKs to be able to execute their API calls, credentials must be provided for a role or user 
 with the correct permissions to do so.
-The two client builders in this project each require injection of an `AWSCredentialsProvider` bean, to provide those credentials. 
+The two client builders in this project each require injection of an `AwsCredentialsProvider` bean, to provide those credentials. 
 
 Assuming applications using the features of this project will ultimately be deployed to an EC2 server in AWS, 
-a default `AWSCredentialsProvider` bean is provided, which is auto-configured by `AWSSecureConfigConfiguration` in the 
-fashion of a Spring Boot Starter. If your application provides an alternative `AWSCredentialsProvider` bean, the default 
+a default `AwsCredentialsProvider` bean is provided, which is auto-configured by `AWSSecureConfigConfiguration` in the 
+fashion of a Spring Boot Starter. If your application provides an alternative `AwsCredentialsProvider` bean, the default 
 one will 'back off'.
 
-It is very useful to be able to provide your own `AWSCredentialsProvider` bean, for example, when running your 
+It is very useful to be able to provide your own `AwsCredentialsProvider` bean, for example, when running your 
 application locally on your own development workstation, in which case you may wish to provide 
 a `ProfileCredentialsProvider` bean.
 
