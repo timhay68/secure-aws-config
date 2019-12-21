@@ -1,8 +1,5 @@
 package au.com.haystacker.secureawsconfig.parameters.config;
 
-import com.amazonaws.services.simplesystemsmanagement.AWSSimpleSystemsManagement;
-import com.amazonaws.services.simplesystemsmanagement.model.GetParametersByPathResult;
-import com.amazonaws.services.simplesystemsmanagement.model.Parameter;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +7,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import software.amazon.awssdk.services.ssm.SsmClient;
+import software.amazon.awssdk.services.ssm.model.GetParametersByPathRequest;
+import software.amazon.awssdk.services.ssm.model.GetParametersByPathResponse;
+import software.amazon.awssdk.services.ssm.model.Parameter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.isA;
 import static org.mockito.Mockito.when;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -29,10 +30,9 @@ public class AwsParameterStoreConfigurationTest {
     private AwsParameterStoreProperties properties;
 
     @Mock
-    private AWSSimpleSystemsManagement client;
+    private SsmClient client;
 
-    @Mock
-    private GetParametersByPathResult result;
+    private GetParametersByPathResponse result;
 
     @InjectMocks
     private AwsParameterStoreConfiguration target;
@@ -44,15 +44,18 @@ public class AwsParameterStoreConfigurationTest {
 
     @Test
     public void shouldExtractSecretsWithBasePath() {
-        when(properties.getPathBase()).thenReturn(PATH_BASE);
-        when(client.getParametersByPath(any())).thenReturn(result);
 
-        List<Parameter> params = new ArrayList<>();
+        final List<Parameter> params = new ArrayList<>();
         params.add(buildParameter("db/username", "value1"));
         params.add(buildParameter("db/password", "value2"));
         params.add(buildParameter("some/other/config", "value3"));
 
-        when(result.getParameters()).thenReturn(params);
+        final GetParametersByPathResponse result = GetParametersByPathResponse.builder()
+                .parameters(params)
+                .build();
+
+        when(properties.getPathBase()).thenReturn(PATH_BASE);
+        when(client.getParametersByPath(isA(GetParametersByPathRequest.class))).thenReturn(result);
 
         target.getParameters();
 
@@ -64,11 +67,14 @@ public class AwsParameterStoreConfigurationTest {
 
     @Test
     public void shouldExtractNoSecretsWithBasePathHavingNoEntries() {
-        when(properties.getPathBase()).thenReturn(PATH_BASE);
-        when(client.getParametersByPath(any())).thenReturn(result);
 
-        List<Parameter> params = new ArrayList<>();
-        when(result.getParameters()).thenReturn(params);
+        final List<Parameter> params = new ArrayList<>();
+        final GetParametersByPathResponse result = GetParametersByPathResponse.builder()
+                .parameters(params)
+                .build();
+
+        when(properties.getPathBase()).thenReturn(PATH_BASE);
+        when(client.getParametersByPath(isA(GetParametersByPathRequest.class))).thenReturn(result);
 
         target.getParameters();
 
@@ -81,10 +87,11 @@ public class AwsParameterStoreConfigurationTest {
         assertEquals(expectedValue, actualValue);
     }
 
-    private Parameter buildParameter(String key, String value) {
-        final Parameter param = new Parameter();
-        param.setName(PATH_BASE + "/" + key);
-        param.setValue(value);
+    private static Parameter buildParameter(String key, String value) {
+        final Parameter param = Parameter.builder()
+                .name(PATH_BASE + "/" + key)
+                .value(value)
+                .build();
 
         return param;
     }

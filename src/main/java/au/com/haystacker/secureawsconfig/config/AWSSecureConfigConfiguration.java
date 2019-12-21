@@ -1,10 +1,10 @@
 package au.com.haystacker.secureawsconfig.config;
 
-import com.amazonaws.auth.AWSCredentialsProvider;
-import com.amazonaws.auth.InstanceProfileCredentialsProvider;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import software.amazon.awssdk.auth.credentials.AwsCredentialsProvider;
+import software.amazon.awssdk.auth.credentials.InstanceProfileCredentialsProvider;
 
 /**
  *
@@ -16,7 +16,7 @@ public class AWSSecureConfigConfiguration {
 
     @Bean
     @ConditionalOnMissingBean()
-    public AWSCredentialsProvider defaultAWSCredentialsProvider() {
-        return InstanceProfileCredentialsProvider.getInstance();
+    public AwsCredentialsProvider defaultAWSCredentialsProvider() {
+        return InstanceProfileCredentialsProvider.create();
     }
 }

@@ -18,7 +18,7 @@ import java.lang.annotation.Target;
 public @interface AwsParameter {
     /**
      * The remainder of the path to the AWS Parameter Store parameter.
-     * This will be prefixed with the root configured by the {@code secure-config.parameters.pathBase} property.
+     * This will be prefixed with the root configured by the {@code secure-aws-config.parameters.pathBase} property.
      */
     String name();
 }
