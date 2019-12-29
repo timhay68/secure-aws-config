@@ -140,10 +140,10 @@ class ClassWithFields {
     @AwsParameter(name = "my-parameter")
     private String fieldWithOtherAnnotations;
 
-    @AwsSecret(secretName = "my-bad-type-secret")
+    @AwsSecret(secretKey = "my-bad-type-secret")
     private Integer nonStringFieldWithAnnotation;
 
-    @AwsSecret(secretName = "my-secret")
+    @AwsSecret(secretKey = "my-secret")
     private String fieldWithAnnotations;
 
     public String getFieldWithAnnotations() {

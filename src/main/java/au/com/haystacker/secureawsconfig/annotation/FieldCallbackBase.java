@@ -41,8 +41,6 @@ public abstract class FieldCallbackBase implements ReflectionUtils.FieldCallback
             return;
         }
 
-        LOG.debug("Field name = " + field.getName());
-
         ReflectionUtils.makeAccessible(field);
         Class<?> fieldType = field.getType();
 

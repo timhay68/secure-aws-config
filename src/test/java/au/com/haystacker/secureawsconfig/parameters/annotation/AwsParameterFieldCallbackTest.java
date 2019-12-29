@@ -136,7 +136,7 @@ class ClassWithFields {
 
     private String fieldWithoutAnnotations;
 
-    @AwsSecret(secretName = "my-secret")
+    @AwsSecret(secretKey = "my-secret")
     private String fieldWithOtherAnnotations;
 
     @AwsParameter(name = "my-bad-type-parameter")

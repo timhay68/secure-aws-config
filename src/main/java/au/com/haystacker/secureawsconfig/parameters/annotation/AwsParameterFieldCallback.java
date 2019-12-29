@@ -25,7 +25,6 @@ public class AwsParameterFieldCallback extends FieldCallbackBase
     @Override
     protected String getDeclaredAnnotationKey(Field field) {
         final String parameterName = field.getDeclaredAnnotation(AwsParameter.class).name();
-        LOG.debug("Parameter name = " + parameterName);
 
         return parameterName;
     }

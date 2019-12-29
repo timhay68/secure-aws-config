@@ -23,10 +23,9 @@ public final class AwsSecretFieldCallback extends FieldCallbackBase {
 
     @Override
     protected String getDeclaredAnnotationKey(Field field) {
-        final String secretName = field.getDeclaredAnnotation(AwsSecret.class).secretName();
-        LOG.debug("Secret name = " + secretName);
+        final String secretKey = field.getDeclaredAnnotation(AwsSecret.class).secretKey();
 
-        return secretName;
+        return secretKey;
     }
 
     @Override

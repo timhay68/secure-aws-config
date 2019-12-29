@@ -117,7 +117,7 @@ secure-aws-config:
 ```
 `secure-aws-config.secrets.region` is the region in which your account created the AWS Secrets Manager entry.
 
-`secure-aws-config.secrets.secretName` is the name of the secret containing an entry used by your application.
+`secure-aws-config.secrets.secretName` is the name of the secret containing one or more entries used by your application.
 
 Please refer to [Providing AWS Credentials](#providing-aws-credentials) for details on providing the AWS credentials required to be able to invoke the AWS Secrets Manager SDK APIs.
 
@@ -136,10 +136,10 @@ public class AwsSecretDbCredentials {
 
     private static final Logger LOG = LoggerFactory.getLogger(AwsSecretDbCredentials.class);
 
-    @AwsSecret(secretName = "mysql-username")
+    @AwsSecret(secretKey = "mysql-username")
     private String username;
 
-    @AwsSecret(secretName = "mysql-password")
+    @AwsSecret(secretKey = "mysql-password")
     private String password;
 
     public AwsSecretDbCredentials() {
@@ -171,9 +171,9 @@ public class AwsSecretDbCredentials {
 This annotation should be applied to a class field to which you wish to bind an entry's value from AWS Secrets Manager.
 See above for an example of how to use this annotation.
 
-`@AwsSecret` has one required parameter: `secretName`, which should be set to the key to an entry in AWS Secrets Manager.
+`@AwsSecret` has one required parameter: `secretKey`, which should be set to the key to an entry in AWS Secrets Manager.
 
-The value for `secretName` is the key to an entry in the secret named by the `secure-aws-config.secrets.secretName` property.
+The value for `secretKey` is the key to an entry in the secret named by the `secure-aws-config.secrets.secretName` property.
 
 ### Providing AWS Credentials
 In order for the respective SDKs to be able to execute their API calls, credentials must be provided for a role or user 
