@@ -2,11 +2,14 @@ plugins {
     id 'java'
     id 'maven'
     id 'maven-publish'
+    id 'signing'
     id 'jacoco'
     id 'idea'
     id 'org.springframework.boot' version '2.1.5.RELEASE'
 }
 
+group = "au.com.haystacker"
+archivesBaseName = "secure-aws-config"
 version="2.0.0"
 
 ext {
@@ -56,6 +59,27 @@ dependencies {
     testCompile "org.springframework.boot:spring-boot-starter:${springFrameworkBootVersion}"
 }
 
+
+task javadocJar(type: Jar) {
+    from javadoc
+    archiveClassifier.set('javadoc')
+}
+
+task sourcesJar(type: Jar) {
+    from sourceSets.main.allSource
+    archiveClassifier.set('sources')
+}
+
+signing {
+    sign jar
+    sign javadocJar
+    sign sourcesJar
+}
+
+artifacts {
+    archives jar, javadocJar, sourcesJar
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
@@ -72,5 +96,48 @@ jacocoTestReport {
         xml.enabled false
         csv.enabled false
         html.destination file("${buildDir}/jacocoHtml")
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: "https://oss.sonatype.org/service/local/staging/deploy/maven2/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            snapshotRepository(url: "https://oss.sonatype.org/content/repositories/snapshots/") {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name 'Secure AWS Config'
+                description 'This project contains annotations for use in injecting values into bean properties from AWS Secrets Manager or AWS Parameter Store.'
+                url 'https://github.com/timhay68/secure-aws-config'
+                packaging 'jar'
+
+                scm {
+                    connection 'scm:git:https://github.com/timhay68/secure-aws-config.git'
+                    developerConnection 'scm:git:https://github.com/timhay68/secure-aws-config.git'
+                    url 'https://github.com/timhay68/secure-aws-config'
+                }
+
+                licenses {
+                    license {
+                        name 'The Apache License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+
+                developers {
+                    developer {
+                        id 'hayt'
+                        name 'Tim Hay'
+                    }
+                }
+            }
+        }
     }
 }
