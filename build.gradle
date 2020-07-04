@@ -5,17 +5,17 @@ plugins {
     id 'signing'
     id 'jacoco'
     id 'idea'
-    id 'org.springframework.boot' version '2.1.5.RELEASE'
+    id 'org.springframework.boot' version '2.3.1.RELEASE'
 }
 
 group = "au.com.haystacker"
 archivesBaseName = "secure-aws-config"
-version="2.0.0"
+version="2.1.0"
 
 ext {
-    dependencyVersionSpringBootGradlePlugin = "2.1.5.RELEASE"
-    springFrameworkVersion = "5.1.7.RELEASE"
-    springFrameworkBootVersion = "2.1.5.RELEASE"
+    dependencyVersionSpringBootGradlePlugin = "2.3.1.RELEASE"
+    springFrameworkVersion = "5.2.7.RELEASE"
+    springFrameworkBootVersion = "2.3.1.RELEASE"
     awsJavaSdkVersion = "2.10.23"
 }
 
