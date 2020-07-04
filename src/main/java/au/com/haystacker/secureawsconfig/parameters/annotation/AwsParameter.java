@@ -19,6 +19,8 @@ public @interface AwsParameter {
     /**
      * The remainder of the path to the AWS Parameter Store parameter.
      * This will be prefixed with the root configured by the {@code secure-aws-config.parameters.pathBase} property.
+     *
+     * @return path to the AWS Parameter Store parameter.
      */
     String name();
 }

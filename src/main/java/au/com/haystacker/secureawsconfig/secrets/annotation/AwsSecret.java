@@ -15,5 +15,11 @@ import java.lang.annotation.Target;
 @Target({ElementType.FIELD})
 @Documented
 public @interface AwsSecret {
+    /**
+     * The key to an entry in AWS Secrets Manager.
+     * The entry will be found in the secret named by the {@code secure-aws-config.secrets.secretName} property.
+     *
+     * @return key to an entry in the secret.
+     */
     String secretKey();
 }
