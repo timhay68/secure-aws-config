@@ -13,6 +13,12 @@ For a sample project demonstrating the use of this module, please visit
 
 ## Usage - installation
 
+### Pre-requisites
+Building and using this library assumes you have the following installed and configured:
+* Java 8+
+* AWS SDK for Java 2.x
+* Gradle 6.x 
+
 ### Gradle, Maven
 
 To use the annotations, you need to add the dependency to your project:
@@ -198,7 +204,7 @@ a `ProfileCredentialsProvider` bean.
 
 Related:
 
-* [AWS Security Best Practices](https://d0.awsstatic.com/whitepapers/Security/AWS_Security_Best_Practices.pdf) Whitepaper
+* [AWS Best Practices for Security, Identity, & Compliance](https://aws.amazon.com/architecture/security-identity-compliance)
 * [AWS SDK for Java](https://aws.amazon.com/sdk-for-java/)
 * [AWS Systems Manager](https://docs.aws.amazon.com/systems-manager/latest/APIReference/Welcome.html)
 * [AWS Secrets Manager](https://docs.aws.amazon.com/secretsmanager/latest/apireference/Welcome.html) 
