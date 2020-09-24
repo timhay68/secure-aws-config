@@ -41,8 +41,6 @@ public class AwsSecretsConfiguration {
     @PostConstruct
     public void getSecrets() {
 
-        LOG.info("**********   AwsSecretsConfiguration.getSecrets()");
-
         GetSecretValueRequest getSecretValueRequest = GetSecretValueRequest.builder()
                 .secretId(properties.getSecretName())
                 .build();

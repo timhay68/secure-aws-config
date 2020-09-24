@@ -31,8 +31,6 @@ public class AwsSecretAnnotationProcessor implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, String beanName)
             throws BeansException {
 
-        LOG.info("**********   " + beanName + " : AwsSecretAnnotationProcessor.postProcessBeforeInitialization()");
-
         scanAwsSecretAnnotation(bean, beanName);
 
         return bean;
