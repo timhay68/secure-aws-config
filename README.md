@@ -6,8 +6,9 @@ This project contains annotations for use in injecting values into bean properti
 
 Project is licensed under [Apache License 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
-For a sample project demonstrating the use of this module, please visit 
-[Secure AWS Config Client](https://github.com/timhay68/secure-aws-config-client) on Github.
+For sample projects demonstrating the use of this module, please visit these two sample projects on Github: 
+* [Secure AWS Config Client - Simple](https://github.com/timhay68/secure-aws-config-client-simple)
+* [Secure AWS Config Client - Complete](https://github.com/timhay68/secure-aws-config-client)
 
 -----
 
