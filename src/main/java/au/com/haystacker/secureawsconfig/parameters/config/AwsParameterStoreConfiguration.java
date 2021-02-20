@@ -41,6 +41,7 @@ public class AwsParameterStoreConfiguration {
 
         GetParametersByPathRequest request = GetParametersByPathRequest.builder()
                 .recursive(true)
+                .withDecryption(true)
                 .path(properties.getPathBase())
                 .build();
         GetParametersByPathResponse result = null;
